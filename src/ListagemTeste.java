@@ -7,7 +7,7 @@ public class ListagemTeste {
 
 	public static void main(String[] args) throws SQLException {
 
-		ReferenceConnection rc = new ReferenceConnection();
+		ConnectionFactory rc = new ConnectionFactory();
 		Connection connection = rc.retrieveConnection();
 		
 		Statement statement = connection.createStatement();

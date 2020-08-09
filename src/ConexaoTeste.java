@@ -5,7 +5,7 @@ public class ConexaoTeste {
 
 	public static void main(String[] args) throws SQLException {
 
-		ReferenceConnection rc = new ReferenceConnection();
+		ConnectionFactory rc = new ConnectionFactory();
 		Connection connection = rc.retrieveConnection();
 		
 		System.out.println("Fechando Conexão");
