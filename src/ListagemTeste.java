@@ -7,8 +7,8 @@ public class ListagemTeste {
 
 	public static void main(String[] args) throws SQLException {
 
-		ConnectionFactory rc = new ConnectionFactory();
-		Connection connection = rc.retrieveConnection();
+		ConnectionFactory factory = new ConnectionFactory();
+		Connection connection = factory.retrieveConnection();
 		
 		Statement statement = connection.createStatement();
 
@@ -26,12 +26,6 @@ public class ListagemTeste {
 		// resultSet Variable
 		statement.execute(sql); // since it's needed to process the statement once, this request is made only
 								// calling the method but not storing in a variable
-
-		/**
-		 * closing the connection
-		 */
-		connection.close(); // Closes open connection
-
 		
 		/**
 		 * retrieving the statement information
@@ -45,6 +39,12 @@ public class ListagemTeste {
 			String desc = rs.getString("descricao");
 			System.out.println(desc);
 		}
+		
+
+		/**
+		 * closing the connection
+		 */
+		connection.close(); // Closes open connection
 	}
 
 }

@@ -6,6 +6,7 @@ import java.sql.Statement;
 public class InsertionTeste {
 
 	public static void main(String[] args) throws SQLException {
+
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.retrieveConnection();
 		
@@ -24,13 +25,14 @@ public class InsertionTeste {
 		/**
  		 * However, information was registered. so the following application is better fit
 		 */
+		
 		statement.execute(sql, Statement.RETURN_GENERATED_KEYS);
 		ResultSet rs = statement.getGeneratedKeys();
 		while(rs.next()) {
 			Integer id = rs.getInt(1); // in SQL, the first item of a list is 1
 			System.out.println("O id criado foi: "+ id);
 		}
-
+		
 	}
 
 }
