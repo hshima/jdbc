@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,21 +11,17 @@ public class ListagemTeste {
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.retrieveConnection();
 		
-		Statement statement = connection.createStatement();
-
 		/**
 		 * Creating the request statement
 		 */
 		String sql = "SELECT id, nome, descricao FROM produto";
 		
-		
+		PreparedStatement statement = connection.prepareStatement(sql);
+
 		/**
 		 * Executing the statement
 		 */
-		// List<String> produtos = statement.execute(sql); //this command won't work,
-		// because execute statement returns a success or fail result, but stores in a
-		// resultSet Variable
-		statement.execute(sql); // since it's needed to process the statement once, this request is made only
+		statement.execute(); // since it's needed to process the statement once, this request is made only
 								// calling the method but not storing in a variable
 		
 		/**

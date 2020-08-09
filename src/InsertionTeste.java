@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,8 +11,8 @@ public class InsertionTeste {
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.retrieveConnection();
 		
-		Statement statement = connection.createStatement();
 		String sql = "INSERT INTO PRODUTO (nome, descricao) VALUES ('Mouse', 'Mouse sem fio')";
+		PreparedStatement statement = connection.prepareStatement(sql);
 
 		/**
 		 * test if the query passes
