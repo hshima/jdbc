@@ -10,6 +10,7 @@ public class ConnectionFactory {
 	String url = "jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC";
 	String user = "root";
 	String password = "1234";
+	Integer maxPoolSize = 20;
 
 	/**
 	 * Creates a dataSource Interface to be referenced
@@ -24,6 +25,13 @@ public class ConnectionFactory {
 		comboPooledDataSource.setJdbcUrl(url);
 		comboPooledDataSource.setUser(user);
 		comboPooledDataSource.setPassword(password);
+
+		/**
+		 * Specifies the maximum number of connections. Once the connection limit is
+		 * reached. For more connections than the limit, the PooledDataSource will wait
+		 * for one of the previous connections to be closed before starting a new one
+		 */
+		comboPooledDataSource.setMaxPoolSize(maxPoolSize);
 
 		/**
 		 * References the stablished connection to the dataSource Interface
