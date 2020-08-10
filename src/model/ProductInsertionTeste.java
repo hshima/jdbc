@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import dao.ProductDAO;
 import jdbc.ConnectionFactory;
@@ -17,7 +18,8 @@ public class ProductInsertionTeste {
 			ProductDAO productDAO = new ProductDAO(connection); // Instantiates in a variable so further method could be
 																// called
 			productDAO.save(comoda);
-			// Example: List<Produto> produtos = productDAO.method();
+			List<Produto> produtosLista = productDAO.list();
+			produtosLista.stream().forEach(lp -> System.out.println(lp));
 		}
 		System.out.println(comoda.toString());
 	}
