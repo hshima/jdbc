@@ -9,27 +9,27 @@ public class InsertionWithParamTeste {
 	public static void main(String[] args) throws SQLException {
 
 		ConnectionFactory factory = new ConnectionFactory();
-		Connection connection = factory.retrieveConnection();
-		connection.setAutoCommit(false); // allows Transaction commit action
-		String sql = "INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?)";
-		PreparedStatement statement = null;
-		try {
-			statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); // When using
-																							// prepareStatement, the SQL
-																							// command responsibility
-																							// passes to JDBC
+		try (Connection connection = factory.retrieveConnection()) { // Using try with resourses explores autoclosable method with no need of finally implementation
+			connection.setAutoCommit(false); // allows Transaction commit action
 
-			addVariable("Celular", "Android", statement);
-			addVariable("Celular", "apple", statement);
+			String sql = "INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?)";
+			try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS) // When
+																													// using
+			// prepareStatement, the
+			// SQL
+			// command
+			// responsibility
+			// passes to JDBC
+			) {
+				addVariable("Celular", "Android", statement);
+				addVariable("Celular", "apple", statement);
 
-			connection.commit(); // finishes the transaction
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Executando RollBack");
-			connection.rollback();
-		} finally {
-			statement.close();
-			connection.close();
+				connection.commit(); // finishes the transaction
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Executando RollBack");
+				connection.rollback();
+			}
 		}
 
 	}
@@ -42,10 +42,11 @@ public class InsertionWithParamTeste {
 		 * }
 		 */
 		statement.execute();
-		ResultSet rs = statement.getGeneratedKeys();
-		while (rs.next()) {
-			Integer id = rs.getInt(1);
-			System.out.println("O id criado foi: " + id);
+		try (ResultSet rs = statement.getGeneratedKeys()) {
+			while (rs.next()) {
+				Integer id = rs.getInt(1);
+				System.out.println("O id criado foi: " + id);
+			}
 		}
 	}
 
