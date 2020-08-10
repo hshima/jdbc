@@ -1,3 +1,4 @@
+package jdbc;
 import java.sql.SQLException;
 
 public class PoolConnectionTeste {
