@@ -15,4 +15,9 @@ public class Categoria {
 		return this.nome;
 	}
 
+	public Integer getId() {
+
+		return this.id;
+	}
+
 }
